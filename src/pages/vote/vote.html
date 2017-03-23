@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{channelTitle}}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="nextPagee()">
+                Next
+               <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form (ngSubmit)="submitData()">
+        <ion-list radio-group [(ngModel)]="status" name="vote" [(ngModel)]="vote">
+            <ion-list-header>
+                Mood:
+            </ion-list-header>
+            <ion-item *ngFor="let i of [1,2,3,4,5]">
+                <p item-left>{{getSmiley(i)}}</p>
+                <p item-right>{{getSmileyText(i)}}</p>
+
+                <ion-radio value="{{i}}"></ion-radio>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-list-header>
+                Feedback:
+            </ion-list-header>
+            <ion-item>
+                <ion-textarea name="message" [(ngModel)]="message" maxlength="500" placeholder="Send an anonymous comment" (keydown.enter)="$event.preventDefault()"
+                    (keydown.enter)="submitData()"></ion-textarea>
+            </ion-item>
+        </ion-list>
+        <button ion-button type="submit" block>Submit</button>
+    </form>
+</ion-content>

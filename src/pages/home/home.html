@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>ZZMood</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="checkChannel(title.value)">
+    <ion-item>
+      <ion-input name="title" #title type="text" placeholder="Group name here"></ion-input>
+    </ion-item>
+    <br>
+    <button ion-button type="submit" block>Join</button>
+  </form>
+  <br><br>
+
+  <ion-card *ngIf="storedChannels.length > 0">
+    <ion-card-header color="primary">
+      Recent selections:
+    </ion-card-header>
+    <ion-list>
+      <button ion-item *ngFor="let item of storedChannels" (click)="checkChannel(item.title)">
+        <span item-left>{{item.title}}</span>
+        <ion-note item-right>
+          {{daysAgo(item.lastJoin)}}
+        </ion-note>
+      </button>
+    </ion-list>
+    <ion-row>
+    <button ion-button icon-left clear (click)="removeAll()">
+        Clear
+      </button>
+    </ion-row>
+  </ion-card>
+
+</ion-content>

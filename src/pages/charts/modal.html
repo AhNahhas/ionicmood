@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            {{item.date | date:'fullDate'}}
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Back</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-list-header>
+            <p>Total votes: <b>{{getVoteCount(item.votes)}}</b>, Average: <b>{{getAverageScore([item])}}</b></p>
+        </ion-list-header>
+        <ion-item *ngFor="let i of [1,2,3,4,5]">
+            <p item-left>{{getSmiley(i)}}</p>
+            <p item-right>{{item.votes[i].length}} ({{getVotePercentage(item.votes, i)}}%)</p>
+        </ion-item>
+    </ion-list>
+    <ion-list *ngIf="item.comments.length > 0">
+        <ion-list-header>
+            <p>Comments ({{item.comments.length}})</p>
+        </ion-list-header>
+        <ion-item *ngFor="let c of item.comments">
+            {{c.message}}
+        </ion-item>
+    </ion-list>
+</ion-content>
